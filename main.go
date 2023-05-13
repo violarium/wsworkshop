@@ -19,7 +19,7 @@ func main() {
 		}{Message: "Websocket Workshop"})
 	})
 
-	files := []string{"client-echo.html", "client-echo-auth.html", "client-echo-ping.html", "favicon.ico"}
+	files := []string{"client-echo.html", "client-echo-auth.html", "client-echo-ping.html", "event-source.html", "favicon.ico"}
 	for _, file := range files {
 		f := file
 		r.Get("/"+file, func(w http.ResponseWriter, r *http.Request) {
@@ -37,6 +37,7 @@ func main() {
 	r.Get("/ws-echo", wsEchoHandler)
 	r.Get("/ws-echo-auth", wsEchoAuthHandler)
 	r.Get("/ws-echo-ping", wsEchoPingHandler)
+	r.Get("/event-source", eventSourceHandler)
 
 	if err := http.ListenAndServe(":8080", r); err != nil {
 		panic(err)
